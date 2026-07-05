@@ -68,7 +68,7 @@ const Experience = () => {
             position={new THREE.Vector3(isMobile ? -1 : -2, 0, isMobile ? 0.4 : 0)}>
             <Work/>
           </GridTile>
-          <GridTile title='SIDE PROJECTS'
+          <GridTile title='PROJECTS'
             id="projects"
             color='#bdd1e3'
             textAlign='right'
