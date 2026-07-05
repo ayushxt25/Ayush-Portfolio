@@ -3,11 +3,11 @@ import { WorkTimelinePoint } from "../types";
 
 export const WORK_TIMELINE: WorkTimelinePoint[] = [
   {
-    point: new THREE.Vector3(0, 0, 0),
-    year: '2023',
-    title: 'SRM University AP',
-    subtitle: 'Computer Science Engineering',
-    position: 'right',
+  point: new THREE.Vector3(0, 0, 0),
+  year: '2023 – 2027',
+  title: 'SRM University AP',
+  subtitle: 'B.Tech in Computer Science',
+  position: 'right',
   },
   {
     point: new THREE.Vector3(-4, -4, -3),
