@@ -14,10 +14,10 @@ export const FOOTER_LINKS: FooterLink[] = [
     url: 'https://github.com/ayushxt25',
   },
   {
-    name: 'Spotify',
+    name: 'Apple Music',
     hoverText: 'Curated playlists',
-    icon: 'icons/spotify.svg',
-    url: 'https://open.spotify.com/user/21hr4w2hzp4ceidewwsb4bxoy',
+    icon: 'icons/apple-music.svg',
+    url: 'https://music.apple.com/in/library/playlist/p.pmrAermhNxMO5xR',
   },
   {
     name: 'Instagram',
