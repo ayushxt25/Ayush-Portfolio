@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { AdaptiveDpr, Preload, ScrollControls, useProgress } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
-import { Suspense, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { Suspense, useRef, useSyncExternalStore } from "react";
 import { isMobile } from "react-device-detect";
 
 import { useThemeStore } from "@stores";
@@ -14,23 +14,14 @@ import Preloader from "./Preloader";
 import ProgressLoader from "./ProgressLoader";
 import { ScrollHint } from "./ScrollHint";
 import ThemeSwitcher from "./ThemeSwitcher";
+// import {Perf} from "r3f-perf"
 
 const CanvasLoader = (props: { children: React.ReactNode }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref= useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const backgroundColor = useThemeStore((state) => state.theme.color);
   const { progress } = useProgress();
   const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
-
-  const [forceShowCanvas, setForceShowCanvas] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setForceShowCanvas(true);
-    }, 6000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const canvasStyle: React.CSSProperties = {
     position: "absolute",
@@ -38,9 +29,8 @@ const CanvasLoader = (props: { children: React.ReactNode }) => {
     bottom: 0,
     left: 0,
     right: 0,
-    opacity: forceShowCanvas ? 1 : 0,
+    opacity: 0,
     overflow: "hidden",
-    touchAction: "pan-y",
     ...(mounted && !isMobile && {
       inset: '1rem',
       width: 'calc(100% - 2rem)',
@@ -49,10 +39,22 @@ const CanvasLoader = (props: { children: React.ReactNode }) => {
   };
 
   useGSAP(() => {
-    if (progress >= 95 || forceShowCanvas) {
-      gsap.to('.base-canvas', { opacity: 1, duration: 1.5, delay: 0.5 });
+    if (progress === 100) {
+      gsap.to('.base-canvas', { opacity: 1, duration: 3, delay: 1 });
     }
-  }, [progress, forceShowCanvas]);
+  }, [progress]);
+
+  useGSAP(() => {
+    gsap.to(ref.current, {
+      backgroundColor: backgroundColor,
+      duration: 1,
+    });
+    gsap.to(canvasRef.current, {
+      backgroundColor: backgroundColor,
+      duration: 1,
+      ...noiseOverlayStyle,
+    });
+  }, [backgroundColor]);
 
   const noiseOverlayStyle = {
     backgroundBlendMode: "soft-light",
@@ -61,59 +63,29 @@ const CanvasLoader = (props: { children: React.ReactNode }) => {
     backgroundSize: "100px",
   };
 
-  useGSAP(() => {
-    gsap.to(ref.current, {
-      backgroundColor: backgroundColor,
-      duration: 1,
-    });
-
-    gsap.to(canvasRef.current, {
-      backgroundColor: backgroundColor,
-      duration: 1,
-      ...noiseOverlayStyle,
-    });
-  }, [backgroundColor]);
-
   return (
-    <div className="h-[100dvh] min-h-[100vh] wrapper relative overflow-hidden">
-      <div className="h-[100dvh] min-h-[100vh] relative" ref={ref}>
-        <Canvas
-          className="base-canvas"
-          shadows={!isMobile}
+    <div className="h-[100dvh] wrapper relative">
+      <div className="h-[100dvh] relative" ref={ref}>
+        <Canvas className="base-canvas"
+          shadows
           style={canvasStyle}
           ref={canvasRef}
-          dpr={isMobile ? 1 : [1, 2]}
-          gl={{
-            antialias: !isMobile,
-            alpha: false,
-            powerPreference: isMobile ? "low-power" : "high-performance",
-            failIfMajorPerformanceCaveat: false,
-          }}
-          performance={{ min: 0.3 }}
-        >
+          dpr={[1, 2]}>
+          {/* <Perf/> */}
           <Suspense fallback={null}>
             <ambientLight intensity={0.5} />
 
-            <ScrollControls
-              pages={4}
-              damping={isMobile ? 0.25 : 0.4}
-              maxSpeed={1}
-              distance={1}
-              style={{ zIndex: 1 }}
-            >
+            <ScrollControls pages={4} damping={0.4} maxSpeed={1} distance={1} style={{ zIndex: 1 }}>
               {props.children}
               <Preloader />
             </ScrollControls>
 
-            {!isMobile && <Preload all />}
+            <Preload all />
           </Suspense>
-
-          {!isMobile && <AdaptiveDpr pixelated />}
+          <AdaptiveDpr pixelated/>
         </Canvas>
-
-        <ProgressLoader progress={forceShowCanvas ? 100 : progress} />
+        <ProgressLoader progress={progress} />
       </div>
-
       <AwwardsBadge />
       <ThemeSwitcher />
       <ScrollHint />
