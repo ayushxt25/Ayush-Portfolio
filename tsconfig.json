@@ -32,6 +32,9 @@
       "@types": [
         "./app/types"
       ],
+      "@hooks": [
+        "./app/hooks"
+      ],
       "@constants": [
         "./app/constants"
       ]

@@ -1,16 +1,17 @@
 // import "react-crud-icons/dist/react-crud-icons.css";
 
 import { useGSAP } from "@gsap/react";
+import { useIsMobile } from "@hooks";
 import { usePortalStore, useThemeStore } from "@stores";
 import gsap from "gsap";
 import Image from 'next/image';
 import { useEffect, useRef } from "react";
-import { isMobile } from "react-device-detect";
 
 const ThemeSwitcher = () => {
   const themeSwitcherRef = useRef<HTMLDivElement>(null);
   const { nextTheme, theme } = useThemeStore();
   const isActive = usePortalStore((state) => state.activePortalId);
+  const isMobile = useIsMobile();
   const positionClass = isMobile ? 'top-2 right-2' : 'top-6 right-6';
   const toggleTheme = () => nextTheme();
 

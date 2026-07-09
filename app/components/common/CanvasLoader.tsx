@@ -5,8 +5,8 @@ import { AdaptiveDpr, Preload, ScrollControls, useProgress } from "@react-three/
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import { Suspense, useRef, useSyncExternalStore } from "react";
-import { isMobile } from "react-device-detect";
 
+import { useIsMobile } from "@hooks";
 import { useThemeStore } from "@stores";
 
 import AwwardsBadge from "./AwwardsBadge";
@@ -19,6 +19,7 @@ import ThemeSwitcher from "./ThemeSwitcher";
 const CanvasLoader = (props: { children: React.ReactNode }) => {
   const ref= useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMobile = useIsMobile();
   const backgroundColor = useThemeStore((state) => state.theme.color);
   const { progress } = useProgress();
   const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);

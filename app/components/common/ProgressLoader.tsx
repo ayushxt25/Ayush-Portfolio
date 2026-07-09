@@ -1,15 +1,17 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+
+import { useIsMobile } from '@hooks';
 
 /**
  * Partially AI Generated
  */
 const ProgressLoader = ({ progress }: { progress: number }) => {
   const strokeWidth = 3;
+  const isMobile = useIsMobile();
   const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   // Effect to update dimensions on window resize

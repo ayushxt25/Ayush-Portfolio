@@ -1,10 +1,10 @@
 
 import { Edges, MeshPortalMaterial, Text, TextProps, useScroll } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
+import { useIsMobile } from '@hooks';
 import { usePortalStore } from '@stores';
 import gsap from "gsap";
 import { useEffect, useRef } from 'react';
-import { isMobile } from 'react-device-detect';
 import * as THREE from 'three';
 import { TriangleGeometry } from './Triangle';
 
@@ -25,6 +25,7 @@ const GridTile = (props: GridTileProps) => {
   const portalRef = useRef(null);
   const { title, textAlign, children, color, position, id } = props;
   const { camera } = useThree();
+  const isMobile = useIsMobile();
   const setActivePortal = usePortalStore((state) => state.setActivePortal);
   const isActive = usePortalStore((state) => state.activePortalId === id);
   const activePortalId = usePortalStore((state) => state.activePortalId);
