@@ -16,7 +16,7 @@ import { ScrollHint } from "./ScrollHint";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import {Perf} from "r3f-perf"
 
-const CanvasLoader = (props: { children: React.ReactNode; onSceneError?: () => void }) => {
+const CanvasLoader = (props: { children: React.ReactNode }) => {
   const ref= useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isMobile = useIsMobile();
@@ -68,16 +68,10 @@ const CanvasLoader = (props: { children: React.ReactNode; onSceneError?: () => v
     <div className="h-[100dvh] wrapper relative">
       <div className="h-[100dvh] relative" ref={ref}>
         <Canvas className="base-canvas"
-          shadows={!isMobile}
+          shadows
           style={canvasStyle}
           ref={canvasRef}
-          dpr={isMobile ? 1 : [1, 2]}
-          gl={{ antialias: !isMobile, powerPreference: isMobile ? 'low-power' : 'high-performance' }}
-          onCreated={({ gl }) => {
-            gl.domElement.addEventListener('webglcontextlost', () => {
-              props.onSceneError?.();
-            }, { once: true });
-          }}>
+          dpr={[1, 2]}>
           {/* <Perf/> */}
           <Suspense fallback={null}>
             <ambientLight intensity={0.5} />
@@ -87,7 +81,7 @@ const CanvasLoader = (props: { children: React.ReactNode; onSceneError?: () => v
               <Preloader />
             </ScrollControls>
 
-            {!isMobile && <Preload all />}
+            <Preload all />
           </Suspense>
           <AdaptiveDpr pixelated/>
         </Canvas>
