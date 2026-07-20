@@ -39,6 +39,18 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/ayushxt25/Leetcode-Solutions',
   },
   {
+    title: 'Portfolio',
+    date: 'Jul 2026',
+    subtext: '[Enter a meta joke].',
+    url: 'https://github.com/mohitvirli/mohitvirli.github.io',
+  },
+  {
+    title: 'Merchant Pulse',
+    date: 'Jul 2026',
+    subtext: 'Built in 30 minutes of vibe coding—because apparently merchant churn needed a dashboard before I needed sleep.',
+    url: 'https://github.com/ayushxt25/merchant-pulse',
+  },
+  {
     title: 'Breast Cancer Detector',
     date: 'Oct 2025',
     subtext: 'A breast cancer detection project built to predict whether a tumor is benign or malignant using machine learning. It follows a structured ML workflow with dataset preprocessing, model training, evaluation metrics, and a user-facing prediction interface.',
@@ -49,12 +61,6 @@ export const PROJECTS: Project[] = [
     date: 'Dec 2025',
     subtext: 'A MERN-based job tracker for managing applications, reminders, interview progress, resumes, and analytics from one dashboard.',
     url: 'https://github.com/ayushxt25/Job-tracker',
-  },
-  {
-    title: 'Portfolio',
-    date: 'Apr 2025',
-    subtext: '[Enter a meta joke].',
-    url: 'https://github.com/mohitvirli/mohitvirli.github.io',
   },
   {
     title: 'Quantum Guard',
