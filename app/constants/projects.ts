@@ -15,6 +15,12 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/ayushxt25/Nexora',
   },
   {
+    title: 'Veridex',
+    date: 'Jul 2026',
+    subtext: 'A production-oriented document intelligence platform that combines dense and sparse retrieval to deliver citation-backed answers from uploaded files.',
+    url: 'https://github.com/ayushxt25/Veridex',
+  },
+  {
     title: 'CodeForge',
     date: 'June 2026',
     subtext: 'A real-time collaborative coding platform with room-based sessions, live typing indicators, Monaco Editor integration, and multi-language code editing support.',
