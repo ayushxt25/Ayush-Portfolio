@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
   {
     title: 'Portfolio',
     date: 'Jul 2026',
-    subtext: '[Enter a meta joke].',
+    subtext: 'You’re looking at the project while standing inside the project. Very meta, mildly unnecessary.',
     url: 'https://github.com/mohitvirli/mohitvirli.github.io',
   },
   {
